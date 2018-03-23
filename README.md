@@ -2,7 +2,7 @@
 
 A Leiningen plugin to build and deploy [Docker](https://www.docker.com/) images.
 
-[![Clojars Project](http://clojars.org/io.sarnowski/lein-docker/latest-version.svg)](http://clojars.org/io.sarnowski/lein-docker)
+[![Clojars Project](http://clojars.org/com.greshamtech/lein-docker/latest-version.svg)](http://clojars.org/com.greshamtech/lein-docker)
 
 ## Usage
 
