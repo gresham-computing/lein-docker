@@ -1,6 +1,7 @@
 (ns leiningen.docker
   (:require [leiningen.core.eval :as eval]
-            [leiningen.core.main :as main]))
+            [leiningen.core.main :as main]
+            [clojure.string :as string]))
 
 (defn- exec [& args]
   (apply main/debug "Exec: docker" args)
@@ -30,12 +31,14 @@
           build-dir (or (:build-dir config)
                         (:root project))
           dockerfile (or (:dockerfile config)
-                         "Dockerfile")]
+                         "Dockerfile")
+          args (or (:args config) [])]
 
       (case command
         :build (do
                  (main/info "Building Docker image:" image)
-                 (let [exit-code (exec "build" "-f" dockerfile "-t" image build-dir)]
+                 (let [arg-flags (map (fn [{:keys [name value]}] (str "--build-arg " name "=" value)) args)
+                       exit-code (exec "build" "-f" dockerfile "-t" image (string/join " " arg-flags) build-dir)]
                    (if (zero? exit-code)
                      (main/info "Docker image built.")
                      (do

@@ -26,7 +26,8 @@ You can add the following configuration options at the root of your `project.clj
 ```clojure
 :docker {:image-name "myregistry.example.org/myimage"
          :dockerfile "target/dist/Dockerfile"
-         :build-dir  "target"}
+         :build-dir  "target"
+         :args [{:name "myarg" :value "myval"}]}
 ```
 
 Defaults:
@@ -34,6 +35,7 @@ Defaults:
 * `:image-name` is your project's name (without the group ID)
 * `:dockerfile` points to `Dockerfile`
 * `:build-dir` points to the project's root
+* `:args` is []
 
 ## Releasing your docker images
 
